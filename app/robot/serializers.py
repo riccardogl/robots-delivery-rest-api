@@ -128,8 +128,8 @@ class RobotAddSerializer(serializers.ModelSerializer):
             if packages is not None and len(packages) > 0:
                 insert_packages = []
                 auth_user = self.context['request'].user
-                user_meds = packages.objects.filter(user=auth_user)
-                robot_remianing_space = instance.weight_limit
+                user_meds = Package.objects.filter(user=auth_user)
+                robot_remaining_space = instance.weight_limit
 
                 for item in packages:
                     if instance.packages.filter(code=item).exists():
@@ -145,8 +145,8 @@ class RobotAddSerializer(serializers.ModelSerializer):
                                 user=auth_user,
                                 code=item
                                 )
-                        robot_remianing_space -= new_package.weight
-                        if robot_remianing_space < 0:
+                        robot_remaining_space -= new_package.weight
+                        if robot_remaining_space < 0:
                             raise ParseError(detail='The robot cannot load '
                                                     'the total weight of the'
                                                     ' selected packages.')
