@@ -66,11 +66,11 @@ class RobotViewSet(viewsets.ModelViewSet):
         obj = self.get_object()
         return self.get_and_return_response(request, obj)
 
-    # @action(detail=True)
-    # def check_battery(self, request, *args, **kwargs):
-    #     """Check the battery of the robot."""
-    #     obj = self.get_object()
-    #     return self.get_and_return_response(request, obj)
+    @action(detail=True)
+    def check_battery(self, request, *args, **kwargs):
+        """Check the battery of the robot."""
+        obj = self.get_object()
+        return self.get_and_return_response(request, obj)
 
     def get_and_return_response(self, request, obj, update=False):
         serializer = self.get_serializer(obj, data=request.data)
